@@ -1,0 +1,43 @@
+<!doctype html>
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+{#TODO: Load settings and other required details like sidebar etc #}
+
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock title %} NoteTaker - Note Journey</title>
+    {% block extrastyle %}{% endblock extrastyle %}
+    {% include 'includes/head.html' %}
+    {% block extrahead %}{% endblock extrahead %}
+</head>
+<body class="{% block body %}{% endblock body %}">
+    <div class="page">
+        {% block navigation %}
+            {% include 'includes/navigation.html' %}
+        {% endblock navigation %}
+        {% block sidebar %}
+            {% include 'includes/sidebar.html' %}
+        {% endblock sidebar %}
+        {% block content %}{% endblock content %}
+        {% block footer %}
+            {% include 'includes/footer.html' %}
+        {% endblock footer %}
+    </div>
+    <script src="{% static 'dist/js/tabler.min.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (event) {
+                const searchQuery = document.querySelector('input[name="q"]').value;
+                const url = "{% url 'notes:note_list' %}?q=" + encodeURIComponent(searchQuery);
+                form.action = url;
+            });
+        });
+    </script>
+    {% block modal %}{% endblock modal %}
+    {% block extrajs %}{% endblock extrajs %}
+
+</body>
+</html>

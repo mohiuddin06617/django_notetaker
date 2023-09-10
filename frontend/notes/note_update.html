@@ -1,0 +1,70 @@
+{% extends 'layouts/base_admin_panel.html' %}
+{% load static %}
+
+{% block title %}Edit Note - {{ object.title }} - {% endblock title %}
+{% block content %}
+
+    <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+            <div class="container-xl">
+                <div class="row g-2 align-items-center">
+                    <div class="col">
+                        <h2 class="page-title">
+                            Edit Note - {{ object.title }}
+                        </h2>
+                    </div>
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="d-flex">
+                            <a href="{% url 'notes:note_list' %}" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list-tree"
+                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M9 6h11"></path>
+                                    <path d="M12 12h8"></path>
+                                    <path d="M15 18h5"></path>
+                                    <path d="M5 6v.01"></path>
+                                    <path d="M8 12v.01"></path>
+                                    <path d="M11 18v.01"></path>
+                                </svg>
+                                All Notes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary justify-content-end">Update Note</button>
+                            <a href="{% url 'notes:note_list' %}" class="btn btn-secondary justify-content-end">
+                                Back to Notes
+                            </a>
+                        </form>
+
+                        <!-- Display form errors here -->
+                        {% if form.errors %}
+                            <div class="alert alert-danger mt-3">
+                                <strong>Error(s):</strong>
+                                <ul>
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                            <li>{{ field|capfirst }}: {{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

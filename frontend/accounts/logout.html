@@ -1,0 +1,24 @@
+{% extends 'layouts/base_auth.html' %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="card card-md">
+                <div class="card-body">
+                    <h1 class="fw-bolder">{% trans 'Logged out' %}</h1>
+
+                    <p>
+                        {% trans 'Thanks for spending some quality time with the site today.' %}
+                    </p>
+
+                    <p>
+                        <a href="{% url 'accounts:login' %}" class="btn btn-primary w-100">{% trans 'Log in again' %}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'layouts/base_auth.html' %}
+{% load i18n static %}
+
+{% block title %}Sign in - {% endblock title %}
+
+{% block body %}d-flex flex-column{% endblock body %}
+
+{% block content %}
+
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="text-center mb-4">
+                <a href="{% url 'accounts:profile' %}" class="navbar-brand navbar-brand-autodark"><img
+                        src="{% static 'img/dashboard-logo.png' %}" height="36" alt=""></a>
+            </div>
+            <div class="card card-md">
+                <div class="card-body">
+                    <h2 class="h2 text-center mb-4">Login to your account</h2>
+                    <form action="{% url 'accounts:login' %}" method="POST" class="needs-validation">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                                <span class="text-danger d-block mb-3">{{ error }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            {{ form.email }}
+                            <p class="fs-6 text-secondary">{{ form.email.help_text }}</p>
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="mb-2">
+                            <label for="id_password" class="form-label">{% trans "Password" %}</label>
+                            {{ form.password }}
+                            <div class="validation-errors">
+                                {{ form.password.errors }}
+                            </div>
+                            <div class="fs-6 text-secondary">{{ form.password.help_text }}</div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button class="btn btn-primary w-100" type="sumbit">{% trans "Sign in" %}</button>
+                        </div>
+
+                    </form>
+
+                    <div class="text-center text-muted mt-3">
+                        Don't have an account? <a href="{% url 'accounts:registration' %}" tabindex="-1">Register</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

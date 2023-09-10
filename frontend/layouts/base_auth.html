@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock title %} NoteTaker - A Premium Note Taking Application.</title>
+    {% block extrastyle %}{% endblock extrastyle %}
+    {% include 'includes/head.html' %}
+  </head>
+  <body  class="{% block body %}{% endblock body %} ">
+    {% block content %}{% endblock content %}
+    <!-- Libs JS -->
+    {% block extrajs %}{% endblock extrajs %}
+  </body>
+</html>
